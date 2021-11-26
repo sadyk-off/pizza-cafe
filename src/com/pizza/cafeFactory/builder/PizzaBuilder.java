@@ -1,6 +1,6 @@
-package com.pizza.customCombo.builder;
+package com.pizza.cafeFactory.builder;
 
-import com.pizza.customCombo.product.Pizza;
+import com.pizza.cafeFactory.product.Pizza;
 
 public abstract class PizzaBuilder {
 

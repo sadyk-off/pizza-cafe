@@ -10,7 +10,7 @@ public class MargheritaPizzaFactory extends AbstractPizzaFactory {
     private String name = "Margherita";
     private double price = 3700;
 
-    public  String getName() {
+    public String getName() {
         return name;
     }
 

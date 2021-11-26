@@ -1,6 +1,11 @@
 package com.pizza.menu;
 
-import com.pizza.customCombo.concreteBuilder.HawaiianPizzaBuilder;
+import com.pizza.builder.Director;
+import com.pizza.builder.Pizza;
+import com.pizza.builder.PizzaBuilder;
+import com.pizza.cafeFactory.concreteBuilder.HawaiianPizzaBuilder;
+import com.pizza.notification.customer.PersonalDisplay;
+import com.pizza.notification.orderTable.OrderTable;
 import com.pizza.order.Order;
 import com.pizza.order.adapter.CardImplementation;
 import com.pizza.order.adapter.CardToCashAdapter;
@@ -12,15 +17,15 @@ import com.pizza.pizzasFactory.concreteFactory.PepperoniPizzaFactory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class MenuFacade {
-    public static Map<Integer, Double> menu = new HashMap<>();
+    private static Map<Integer, Double> menu = new HashMap<>();
     private static Order order = new Order();
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private static OrderTable orderTable = new OrderTable();
+
 
 
     public static void openMenu() throws IOException {
@@ -29,12 +34,16 @@ public class MenuFacade {
         MargheritaPizzaFactory margheritaPizzaFactory = new MargheritaPizzaFactory();
         PepperoniPizzaFactory pepperoniPizzaFactory = new PepperoniPizzaFactory();
         HawaiianPizzaBuilder hawaiianPizzaBuilder = new HawaiianPizzaBuilder();
+        Director director = new Director();
+        PizzaBuilder builder = new PizzaBuilder();
+        director.constructVeganPizza(builder);
+
+
 
         menu.put(1, margheritaPizzaFactory.getPrice());
         menu.put(2, pepperoniPizzaFactory.getPrice());
         menu.put(3, hawaiianPizzaBuilder.getPrice());
 
-        boolean active;
         String message;
 
         while (true) {
@@ -51,10 +60,19 @@ public class MenuFacade {
                     System.out.println("Please choose pizza you want to add: \n" +
                             "1." + margheritaPizzaFactory.getName() + "\n" +
                             "2." + pepperoniPizzaFactory.getName() + "\n" +
-                            "3." + hawaiianPizzaBuilder.getName() + "\n" +
-                            "4. Or create your own pizza");
+                            "3." + hawaiianPizzaBuilder.getName() + "\n");
                     int num = Integer.parseInt(reader.readLine());
-//                    if (num == 4)
+
+                    if (num == 3) {
+                        System.out.println("1. See composition \n" +
+                                "2. buy");
+                        int res = Integer.parseInt(reader.readLine());
+                        if (res == 1) {
+                            Pizza pizza = builder.getResult();
+                            System.out.println("pizza name " + pizza.getPizzaType() + "\nsouce type: " + pizza.getSauceType());
+                        }
+                    }
+
                     double cost = menu.get(num);
                     order.setPrice(order.getPrice() + cost);
                     System.out.println("Your total price is : " + order.getPrice());
@@ -91,15 +109,35 @@ public class MenuFacade {
                         System.out.println("Success");
                     }
 
+                    int orderId = ThreadLocalRandom.current().nextInt();
+                    order.setId(orderId);
+                    System.out.println("Your order number is " + order.getId());
                     message = reader.readLine();
                 } while (message.equalsIgnoreCase("Y"));
+
+                PersonalDisplay display = new PersonalDisplay();
+
+                orderTable.getPersonalDisplays().add(display);
+
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        orderTable.setOrderNumber(order.getId());
+                        timer.cancel();
+                        System.out.println( "Thank you! Enjoy your meal!");
+                    }
+                }, 5000);
+
                 break;
+
+
             }
             else System.out.println("Wrong input!");
 
         }
 
-        System.out.println( "Thank you! Enjoy your meal!");
+
 
     }
 }

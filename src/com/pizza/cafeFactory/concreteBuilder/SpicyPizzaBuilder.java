@@ -1,6 +1,6 @@
-package com.pizza.customCombo.concreteBuilder;
+package com.pizza.cafeFactory.concreteBuilder;
 
-import com.pizza.customCombo.builder.PizzaBuilder;
+import com.pizza.cafeFactory.builder.PizzaBuilder;
 
 public class SpicyPizzaBuilder extends PizzaBuilder {
 

@@ -1,7 +1,7 @@
-package com.pizza.customCombo.cooker;
+package com.pizza.cafeFactory.cooker;
 
-import com.pizza.customCombo.builder.PizzaBuilder;
-import com.pizza.customCombo.product.Pizza;
+import com.pizza.cafeFactory.builder.PizzaBuilder;
+import com.pizza.cafeFactory.product.Pizza;
 
 public class Cooker {
 

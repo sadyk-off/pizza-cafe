@@ -1,9 +1,9 @@
-package com.pizza.customCombo.product;
+package com.pizza.cafeFactory.product;
 
 public class Pizza {
-    private String dough = ""; // тесто, корж
-    private String sauce = ""; // соус
-    private String topping = ""; // начинка
+    private String dough = "";
+    private String sauce = "";
+    private String topping = "";
 
     public void setDough(String dough) {
         this.dough = dough;
@@ -19,6 +19,13 @@ public class Pizza {
 
     public String getDough() {
         return dough;
+    }
 
+    public String getSauce() {
+        return sauce;
+    }
+
+    public String getTopping() {
+        return topping;
     }
 }
