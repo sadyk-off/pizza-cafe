@@ -5,8 +5,7 @@ import com.pizza.customCombo.builder.PizzaBuilder;
 public class HawaiianPizzaBuilder extends PizzaBuilder {
 
     private String name = "Hawaiian";
-    private int price = 4100;
-
+    private double price = 4100;
 
     public String getName() {
         return name;
@@ -16,11 +15,11 @@ public class HawaiianPizzaBuilder extends PizzaBuilder {
         this.name = name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

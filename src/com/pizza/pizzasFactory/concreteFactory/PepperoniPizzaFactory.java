@@ -12,7 +12,7 @@ public class PepperoniPizzaFactory extends AbstractPizzaFactory {
 
 
     private String name = "Pepperoni";
-    private int price = 3400;
+    private double price = 3400;
 
     public String getName() {
         return name;
@@ -22,11 +22,11 @@ public class PepperoniPizzaFactory extends AbstractPizzaFactory {
         this.name = name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

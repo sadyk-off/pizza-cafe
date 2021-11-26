@@ -8,7 +8,7 @@ import com.pizza.pizzasFactory.product.PizzaTopping;
 public class MargheritaPizzaFactory extends AbstractPizzaFactory {
 
     private String name = "Margherita";
-    private int price = 3700;
+    private double price = 3700;
 
     public  String getName() {
         return name;
@@ -18,11 +18,11 @@ public class MargheritaPizzaFactory extends AbstractPizzaFactory {
         this.name = name;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
